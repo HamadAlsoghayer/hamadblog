@@ -7,6 +7,6 @@
     <title>Admin</title>
 </head>
 <body>
-    <a href="/create"><button>Create a blog</button></a>
+    <a href="/blogs/create"><button>Create a blog</button></a>
 </body>
 </html>

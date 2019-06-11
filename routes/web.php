@@ -29,13 +29,17 @@ Route::get('/admin', function () {
     return view('admin');
 });
 
-Route::get('/create', function () {
-    return view('createblog');
-});
+
 
 Auth::routes([
-    'register' => false,
+    
 ]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/blogs', 'blogsController@store');
+Route::get('/blogs/create', 'blogsController@create');
+Route::get('/blogs/{blog}/edit', 'blogsController@edit');
+Route::get('/blogs/{blog}/show', 'blogsController@show');
+Route::patch('/blogs/{blog}', 'blogsController@update');
+Route::delete('/blogs/{blog}', 'blogsController@destroy');
 
