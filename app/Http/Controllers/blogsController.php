@@ -40,6 +40,7 @@ class blogsController extends Controller
        $blog = new Blog();
        $blog->title=request('title');
        $blog->content=request('content');
+       $blog->owner_id=auth()->id();
        $blog->save();
         return redirect("/");  //
     }
@@ -50,9 +51,9 @@ class blogsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        $blog=Blog::find($id);
+    public function show(Blog $blog)
+    { 
+
         return view('blogs.show',compact('blog'));
     }
 
@@ -62,9 +63,10 @@ class blogsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Blog $blog)
     {
-        $blog=Blog::find($id);
+        $this->authorize('update',$blog);
+       
         return view('blogs.edit',compact('blog')); //
     }
 
@@ -75,9 +77,9 @@ class blogsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Blog $blog)
     {
-        $blog= Blog::find($id);
+        $this->authorize('update',$blog);
         $blog->title=request('title');
        $blog->content=request('content');
        $blog->save();
@@ -91,9 +93,9 @@ class blogsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Blog $blog)
     {
-        $blog= Blog::find($id);
+        $this->authorize('delete',$blog);
         $blog->delete();
         return redirect('/blogs');
         //

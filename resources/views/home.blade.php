@@ -14,7 +14,13 @@
                            
                         </div>
                     @endif
- <a href="/create"><button>Create a blog</button></a>
+                    <ul>
+     @foreach($blogs as $blog)
+     
+         <li> <a href="/blogs/{{$blog->id}}/show">{{$blog->title}}</a> </li>
+         @endforeach
+     </ul>
+ <a href="/blogs/create"><button>Create a blog</button></a>
                     You are logged in!
                 </div>
             </div>

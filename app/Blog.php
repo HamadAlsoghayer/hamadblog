@@ -9,4 +9,10 @@ class Blog extends Model
     protected $fillable = [
         'title', 'content',
     ];
+
+    public function users()
+    {
+        return $this->belongsTo('App\User');
+    }
+
 }
