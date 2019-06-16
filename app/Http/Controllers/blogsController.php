@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Blog;
+use App\Notifications\blogCreated;
+//use Illuminate\Notifications\Notification;
+use Notification;
+use App\User;
 
 class blogsController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
@@ -25,6 +30,9 @@ class blogsController extends Controller
      */
     public function create()
     {
+
+        
+
         return view('blogs.create');
        //
     }
@@ -37,11 +45,13 @@ class blogsController extends Controller
      */
     public function store(Request $request)
     {
+
        $blog = new Blog();
        $blog->title=request('title');
        $blog->content=request('content');
        $blog->owner_id=auth()->id();
        $blog->save();
+       Notification::send(User::all(), new blogCreated($blog->title));
         return redirect("/");  //
     }
 

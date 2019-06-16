@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Blog;
+use App\Notification;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $blogs=Blog::where('owner_id',auth()->user()->id)->get();
-        return view('home',compact('blogs'));
+ $notifications=Notification::all();
+        return view('home',compact(['blogs','notifications']));
     }
 }

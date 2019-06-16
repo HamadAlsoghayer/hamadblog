@@ -22,6 +22,11 @@
      </ul>
  <a href="/blogs/create"><button>Create a blog</button></a>
                     You are logged in!
+
+                    @foreach($notifications as $bc)
+     
+     <li> <p>{{$bc->data}}</p> </li>
+     @endforeach
                 </div>
             </div>
         </div>

@@ -10,15 +10,15 @@ use Illuminate\Notifications\Messages\MailMessage;
 class blogCreated extends Notification
 {
     use Queueable;
-
+    
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($title1)
     {
-        //
+        $this->title=$title1;//
     }
 
     /**
@@ -29,7 +29,7 @@ class blogCreated extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['database'];
     }
 
     /**
@@ -55,7 +55,7 @@ class blogCreated extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+           "new blog titled ".$this->title." has been added!" //
         ];
     }
 }
